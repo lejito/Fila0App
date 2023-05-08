@@ -4,10 +4,10 @@ require('dotenv').config();
 const port = process.env.PORT || 3000;
 
 // Cargar configuración de la conexión a la base de datos
-const sequelize = require('./db');
+const pool = require('./db');
 
 // Verificar la conexión a la base de datos antes de iniciar
-sequelize.authenticate().then(() => {
+pool.connect().then(() => {
     console.log('Conexión exitosa a PostgreSQL.');
     app.listen(port, () => {
         console.log(`Servidor ejecutándose correctamente en http://locahost:${port}`);

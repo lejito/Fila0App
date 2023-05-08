@@ -12,32 +12,29 @@ CREATE TABLE usuarios(
 	CONSTRAINT usuarios_uq_documento UNIQUE (tipo_documento, numero_documento)
 );
 
-CREATE TABLE administradores(
+CREATE TABLE modulos(
 	id INTEGER NOT NULL,
+  usuario VARCHAR(16) NOT NULL,
 	clave VARCHAR(32) NOT NULL,
-	CONSTRAINT administradores_pk PRIMARY KEY (id)
+	CONSTRAINT modulos_pk PRIMARY KEY (id)
 );
 
-CREATE TYPE estado_turno AS ENUM ('Pendiente', 'Asignado', 'Completado', 'Cancelado');
+CREATE TYPE estado_turno AS ENUM ('Pendiente', 'Asignado', 'En curso', 'Completado', 'Cancelado');
 
 CREATE TABLE turnos(
 	id SERIAL NOT NULL,
 	usuario INTEGER NOT NULL,
-	administrador INTEGER NULL,
-	fecha TIMESTAMP NOT NULL,
+	modulo INTEGER NULL,
+	fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	categoria VARCHAR(3) NOT NULL,
 	codigo VARCHAR(6) NOT NULL,
   estado estado_turno NOT NULL DEFAULT 'Pendiente',
 	CONSTRAINT turnos_pk PRIMARY KEY (id)
 );
 
-ALTER TABLE administradores
-  ADD CONSTRAINT administradores_fk_id FOREIGN KEY (id) REFERENCES usuarios(id) ON UPDATE CASCADE ON DELETE RESTRICT
-;
-
 ALTER TABLE turnos
   ADD CONSTRAINT turnos_fk_usuario FOREIGN KEY (usuario) REFERENCES usuarios(id) ON UPDATE CASCADE ON DELETE RESTRICT,
-  ADD CONSTRAINT turnos_fk_administrador FOREIGN KEY (administrador) REFERENCES administradores(id) ON UPDATE CASCADE ON DELETE RESTRICT
+  ADD CONSTRAINT turnos_fk_modulo FOREIGN KEY (modulo) REFERENCES modulos(id) ON UPDATE CASCADE ON DELETE RESTRICT
 ;
 
 CREATE OR REPLACE FUNCTION generar_codigo_turno() 

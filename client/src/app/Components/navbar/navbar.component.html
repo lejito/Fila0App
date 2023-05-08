@@ -1,0 +1,41 @@
+<ul
+  class="nav nav-pills nav-fill gap-2 p-2 opacity-80"
+  role="tablist"
+  style="
+    background-color: rgba(23, 232, 173, 1);
+    --bs-nav-link-color: var(--bs-white);
+    --bs-nav-pills-link-active-color: var(--bs-black);
+    --bs-nav-pills-link-active-bg: rgba(110, 245, 209, 0.7);
+  "
+>
+  <li>
+    <span class="navbar-brand texto">Fila0</span>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link rounded-5 texto"
+      [routerLink]="'Registro'"
+      [routerLinkActive]="['active']"
+    >
+      Registar turno
+    </a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link rounded-5 texto"
+      [routerLink]="'Turnos'"
+      [routerLinkActive]="['active']"
+    >
+      Ver turnos
+    </a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link rounded-5 texto"
+      [routerLink]="'Gestion'"
+      [routerLinkActive]="['active']"
+    >
+      Gestionar turnos
+    </a>
+  </li>
+</ul>

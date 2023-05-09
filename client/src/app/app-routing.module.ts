@@ -5,9 +5,14 @@ import { GestionTurnosComponent } from './Components/gestion-turnos/gestion-turn
 import { RegistroTurnosComponent } from './Components/registro-turnos/registro-turnos.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/Registro',
+    pathMatch: 'full',
+  },
   { path: 'Turnos', component: VizualizarTurnosComponent },
-  {path:'Gestion',component:GestionTurnosComponent},
-  {path:'Registro',component:RegistroTurnosComponent}
+  { path: 'Gestion', component: GestionTurnosComponent },
+  { path: 'Registro', component: RegistroTurnosComponent },
 ];
 
 @NgModule({

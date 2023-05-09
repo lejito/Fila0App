@@ -1,12 +1,39 @@
-<div class="tabset container p-3 mt-5 shadow-lg">
-  <ul class="tabset-nav ">
+<div class="tabset container pt-3 pb-1 mt-5 shadow-lg">
+  <ul class="tabset-nav">
     <li><a id="#tab1" class="active">Pestaña 1</a></li>
     <li><a id="#tab2">Pestaña 2</a></li>
     <li><a id="#tab3">Pestaña 3</a></li>
   </ul>
   <div class="tabset-panels">
-    <div id="tab1" class="tab-panel active">Contenido de la Pestaña 1</div>
+    <div id="tab1" class="tab-panel active">
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Tipo de documento</label>
+          <select class="form-control" [(ngModel)]="selecionado">
+            <option *ngFor="let tipo of tipos" [value]="tipo">
+              {{ tipo }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Numero de documento</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Verificar</button>
+      </form>
+    </div>
     <div id="tab2" class="tab-panel">Contenido de la Pestaña 2</div>
     <div id="tab3" class="tab-panel">Contenido de la Pestaña 3</div>
+  </div>
+  <div class="progress mt-1" style="height: 0.7rem">
+    <div
+      class="progress-bar progress-bar-striped progress-bar-animated"
+      role="progressbar"
+      aria-valuenow="75"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: barValue }"
+    ></div>
   </div>
 </div>

@@ -43,9 +43,14 @@
   
   .tab-panel {
     display: none;
+    
   }
   
   .tab-panel.active {
-    display: block;
+    display: flex;
+    min-height: 60vh;
+    max-height: 68vh;
+    justify-content: center;
+    padding: 3rem;
   }
   

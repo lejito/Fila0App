@@ -24,20 +24,20 @@ INSERT INTO modulos(id, usuario, clave) VALUES
 	(5, 'modulo5', MD5('1234567a'))
 ;
 
-INSERT INTO turnos(usuario, modulo, categoria, estado) VALUES
-	(1, 1, 'A', 'Cancelado'),
-	(2, 1, 'A', 'Completado'),
-	(3, NULL, 'A', 'Pendiente'),
-	(4, 3, 'A', 'En curso'),
-	(5, 4, 'B', 'Cancelado'),
-	(6, 5, 'B', 'Completado'),
-	(7, NULL, 'A', 'Pendiente'),
-	(8, 4, 'B', 'Asignado'),
-	(9, 2, 'A', 'Asignado'),
-	(10, NULL, 'A', 'Pendiente'),
-	(11, 5, 'B', 'En curso'),
-	(12, NULL, 'B', 'Pendiente'),
-	(13, 1, 'A', 'Asignado'),
-	(14, NULL, 'A', 'Pendiente'),
-	(15, NULL, 'B', 'Pendiente')
+INSERT INTO turnos(usuario, modulo, categoria, estado, fecha_asignado) VALUES
+	(1, 1, 'A', 'Cancelado', CURRENT_TIMESTAMP),
+	(2, 1, 'A', 'Completado', CURRENT_TIMESTAMP),
+	(3, NULL, 'A', 'Pendiente', NULL),
+	(4, 3, 'A', 'En curso', CURRENT_TIMESTAMP),
+	(5, 4, 'B', 'Cancelado', CURRENT_TIMESTAMP),
+	(6, 5, 'B', 'Completado', CURRENT_TIMESTAMP),
+	(7, NULL, 'A', 'Pendiente', NULL),
+	(8, 4, 'B', 'Asignado', CURRENT_TIMESTAMP),
+	(9, 2, 'A', 'Asignado', CURRENT_TIMESTAMP),
+	(10, NULL, 'A', 'Pendiente', NULL),
+	(11, 5, 'B', 'En curso', CURRENT_TIMESTAMP),
+	(12, NULL, 'B', 'Pendiente', NULL),
+	(13, 1, 'A', 'Asignado', CURRENT_TIMESTAMP),
+	(14, NULL, 'A', 'Pendiente', NULL),
+	(15, NULL, 'B', 'Pendiente', NULL)
 ;

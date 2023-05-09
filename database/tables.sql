@@ -29,6 +29,7 @@ CREATE TABLE turnos(
 	categoria VARCHAR(3) NOT NULL,
 	codigo VARCHAR(6) NOT NULL,
   estado estado_turno NOT NULL DEFAULT 'Pendiente',
+  fecha_asignado TIMESTAMP NULL,
 	CONSTRAINT turnos_pk PRIMARY KEY (id)
 );
 

@@ -53,11 +53,11 @@ module.exports = {
     async buscarAsignados(req, res) {
         try {
             const consulta = `
-                SELECT turnos.id, turnos.codigo, turnos.modulo, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
+                SELECT turnos.id, turnos.codigo, turnos.modulo, turnos.fecha_asignado, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
                 FROM turnos
                 INNER JOIN usuarios ON usuarios.id = turnos.usuario
                 WHERE turnos.estado = 'Asignado'
-                ORDER BY turnos.id DESC
+                ORDER BY turnos.fecha_asignado DESC
                 LIMIT 10
             `
             const resultado = await pool.query(
@@ -76,9 +76,9 @@ module.exports = {
         try {
             const { modulo, categoria } = req.body;
 
-            const consulta = `
+            let consulta = `
                 UPDATE turnos 
-                SET estado = 'Asignado', modulo = $1
+                SET estado = 'Asignado', modulo = $1, fecha_asignado = CURRENT_TIMESTAMP
                 WHERE id = (
                     SELECT MIN(id)
                     FROM turnos
@@ -86,7 +86,7 @@ module.exports = {
                 )
                 RETURNING id
             `
-            const resultado = await pool.query(
+            let resultado = await pool.query(
                 consulta,
                 [
                     modulo,
@@ -94,11 +94,35 @@ module.exports = {
                 ]
             );
 
+            if (categoria == "N/A") {
+                consulta = `
+                    UPDATE turnos 
+                    SET estado = 'Asignado', modulo = $1, fecha_asignado = CURRENT_TIMESTAMP
+                    WHERE id = (
+                        SELECT MIN(id)
+                        FROM turnos
+                        WHERE estado = 'Pendiente'
+                    )
+                    RETURNING id
+                `
+
+                resultado = await pool.query(
+                    consulta,
+                    [
+                        modulo
+                    ]
+                );
+            }
+
+            if (resultado.rowCount == 0) {
+                return res.status(500).json({ error: 'No se encontró ningun turno para asignar.' });
+            }
+
             try {
                 const idTurnoAsignado = resultado.rows[0].id;
 
                 const consulta2 = `
-                    SELECT turnos.id, turnos.codigo, turnos.modulo, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
+                    SELECT turnos.id, turnos.codigo, turnos.modulo, turnos.fecha_asignado, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
                     FROM turnos
                     INNER JOIN usuarios ON usuarios.id = turnos.usuario
                     WHERE turnos.id = $1
@@ -117,6 +141,7 @@ module.exports = {
                 return res.status(500).json({ error: 'Ha ocurrido un error al intentar buscar los datos del turno asignado.' });
             }
         } catch (error) {
+            console.log(error);
             return res.status(500).json({ error: 'Ha ocurrido un error al intentar asignar un turno.' });
         }
     },

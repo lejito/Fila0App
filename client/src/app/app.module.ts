@@ -7,6 +7,7 @@ import { GestionTurnosComponent } from './Components/gestion-turnos/gestion-turn
 import { RegistroTurnosComponent } from './Components/registro-turnos/registro-turnos.component';
 import { VizualizarTurnosComponent } from './Components/vizualizar-turnos/vizualizar-turnos.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     RegistroTurnosComponent,
     GestionTurnosComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule,FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [],

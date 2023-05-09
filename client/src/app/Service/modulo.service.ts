@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 export class ModuloService {
   public url: string;
   constructor(private _http: HttpClient) {
-    this.url = URL + '/turnos/';
+    this.url = URL + '/modulos/';
   }
   validarLogin(usuario: string, clave: string): Observable<any> {
     let params = JSON.stringify({ usuario: usuario, clave: clave });
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.post(`${this.url}registrar`, params, {
+    return this._http.post(`${this.url}validarLogin`, params, {
       headers: headers,
     });
   }

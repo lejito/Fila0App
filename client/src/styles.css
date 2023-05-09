@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --principal:rgba(23, 232, 173, 1);
+    --principal_contraste:rgba(110, 245, 209, 0.7);
+    --color_texto:rgb(107, 107, 107);
+    --fondo_verde:rgba(110, 245, 209, 0.7);
+    --fondo_gris:rgba(200, 232, 223, 0.5);
+    
+  }

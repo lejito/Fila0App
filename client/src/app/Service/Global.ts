@@ -1,4 +1,4 @@
-export const URL = 'http://locahost:3000';
+export const URL = 'http://localhost:3000/api';
 export enum ESTADOS {
   COMPLETADO = 'Completado',
   ASIGNADO = 'Asignado',

@@ -22,7 +22,7 @@
   .tabset-nav a {
     display: block;
     padding: 10px;
-    background-color: rgba(23, 232, 173, 1);
+    background-color: var(--principal);
     color: #333;
     border-radius: 5px 5px 0 0;
     text-decoration: none;
@@ -30,14 +30,14 @@
   }
   
   .tabset-nav a.active {
-    background-color: rgba(110, 245, 209, 0.7);
+    background-color:var(--fondo_verde);
     border-bottom: 1px solid #fff;
   }
   
   /* Estilos para los paneles de contenido */
   .tabset-panels {
     padding: 10px;
-    background-color: rgba(200, 232, 223, 0.5);
+    background-color: var(--fondo_gris);
     border-radius: 5px 5px 5px 5px;
   }
   
@@ -53,4 +53,20 @@
     justify-content: center;
     padding: 3rem;
   }
+  .opcionTurno{
+    cursor: pointer;
+    margin: 0.2rem;
+    text-align: center;
+    padding: 1.5rem;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: x-large;
+    font-weight: 400;
+  }
   
+  .opcionTurno:hover{
+    border: 0.1rem solid blue;
+  }
+ .activo{
+  border: 0.1rem solid blue;
+ }

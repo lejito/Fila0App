@@ -20,7 +20,7 @@ module.exports = {
             );
 
             if (resultado.rowCount == 0) {
-                return res.status(401).json({ error: 'Los datos de ingreso son inválidos.' });
+                return res.status(200).json({ error: 'Los datos de ingreso son inválidos.' });
             }
             else {
                 const usuarioEncontrado = cambiarNotacion(resultado.rows[0]);

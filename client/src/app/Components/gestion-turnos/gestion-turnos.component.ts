@@ -9,6 +9,7 @@ import { ModuloService } from 'src/app/Service/modulo.service';
 })
 export class GestionTurnosComponent implements OnInit {
   public moduloActivo = false;
+  negado = false;
   public modulo = 0;
   private flecha_derecha = `<svg
 xmlns="http://www.w3.org/2000/svg"
@@ -54,11 +55,14 @@ viewBox="0 0 16 16"
     this._moduloService
       .validarLogin(this.usuario, this.clave)
       .subscribe((resp) => {
-        if (resp) {
+        if (!resp.error) {
           this.modulo = resp.id;
           this.moduloActivo = true;
           sessionStorage.setItem('MODULO', resp.id);
-          this.router.navigate(['Atender']);
+          this.negado = false;
+          this.router.navigateByUrl('Gestion/Atender');
+        } else {
+          this.negado = true;
         }
       });
   }

@@ -4,7 +4,7 @@ import { VizualizarTurnosComponent } from './Components/vizualizar-turnos/vizual
 import { GestionTurnosComponent } from './Components/gestion-turnos/gestion-turnos.component';
 import { RegistroTurnosComponent } from './Components/registro-turnos/registro-turnos.component';
 import { PendientesComponent } from './components/pendientes/pendientes.component';
-import { AtenderComponent } from './atender/atender.component';
+import { AtenderComponent } from './Components/atender/atender.component';
 
 const routes: Routes = [
   {

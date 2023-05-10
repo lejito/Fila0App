@@ -8,6 +8,7 @@
         name="usuario"
         #Usuario
         [(ngModel)]="usuario"
+        (focus)="negado = false"
       />
     </div>
     <div class="columna mb-3">
@@ -17,9 +18,14 @@
         class="form-control"
         name="numeroDocu"
         [(ngModel)]="clave"
+        (focus)="negado = false"
         #Clave
       />
+      <div class="msg-error" [hidden]="!negado">
+        Ingreso negado, datos erroneos
+      </div>
     </div>
+
     <button
       type="submit"
       class="btn btn-primary w-25"
@@ -28,7 +34,7 @@
       [disabled]="!Clave.value || !Usuario.value"
       (click)="verificar(bttnVerificar)"
     >
-      Verificar
+      Ingresar
     </button>
   </div>
 </div>

@@ -9,7 +9,7 @@ import { VizualizarTurnosComponent } from './Components/vizualizar-turnos/vizual
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PendientesComponent } from './components/pendientes/pendientes.component';
-import { AtenderComponent } from './atender/atender.component';
+import { AtenderComponent } from './Components/atender/atender.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { AtenderComponent } from './atender/atender.component';
     RegistroTurnosComponent,
     GestionTurnosComponent,
     PendientesComponent,
-    AtenderComponent
+    AtenderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

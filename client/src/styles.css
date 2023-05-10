@@ -11,3 +11,44 @@
   body{
     font-family: var(--texto_principal);
   }
+
+  .fondo{
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding:1.5rem;
+    min-height: 60vh;
+    overflow:hidden;
+}
+
+.capa{
+    background: var(--fondo_gris);
+    padding: 2rem;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+    
+}
+.columna{
+    min-width: 20vw;
+    max-width: 30vw;
+    align-self: center;
+}
+.msg-error {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  font-size: large;
+  color: #dc3545;
+}
+
+.texto{
+   
+  color: rgb(107, 107, 107);
+  font-family: var(--texto_titulo);
+  font-size: x-large;
+  font-weight: 400;
+
+}

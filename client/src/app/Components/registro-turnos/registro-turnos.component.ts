@@ -117,16 +117,25 @@ export class RegistroTurnosComponent implements OnInit {
       if (resp) {
         this.turno = resp;
         setTimeout(() => {
-          this.progresoValor = 0;
-          this.barValue = '0%';
-          this.numeroDocumento = '';
-          this.selecionado = '';
-          const opcionactivo = document.querySelector('.opcionTurno.activo');
-          if (opcionactivo) {
-            opcionactivo.classList.remove('activo');
-          }
+          this.resetearFormulario();
         }, 3000);
       }
     });
+  }
+  resetearFormulario() {
+    this.progresoValor = 0;
+    this.barValue = '0%';
+    this.numeroDocumento = '';
+    this.selecionado = '';
+    this.verificado = false;
+    const opcionactivo = document.querySelector('.opcionTurno.activo');
+    const btnVerificar = document.getElementById('btnVerificar');
+    if (opcionactivo) {
+      opcionactivo.classList.remove('activo');
+    }
+    if (btnVerificar) {
+      btnVerificar.style.background = 'blue';
+      btnVerificar.style.borderColor = 'blue';
+    }
   }
 }

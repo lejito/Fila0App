@@ -2,9 +2,11 @@ import { Usuario } from './Usuario';
 
 export class Turno {
   constructor(
-    public _id: number,
+    public id: number,
     public codigo: string,
-    public modulo: number,
-    public usuario: Usuario
+    public estado:string,
+    public fecha:string,
+    public modulo?: number,
+    public usuario?: Usuario
   ) {}
 }

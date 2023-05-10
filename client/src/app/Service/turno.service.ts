@@ -6,7 +6,7 @@ import { Turno } from '../models/Turno';
 @Injectable({
   providedIn: 'root',
 })
-export class TurnoService {
+export class  TurnoService {
   public url: string;
   constructor(private _http: HttpClient) {
     this.url = URL + '/turnos/';

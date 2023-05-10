@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./gestion-turnos.component.css']
 })
 export class GestionTurnosComponent {
+  toggle() {
+    let wrapper = document.getElementById('wrapper');
+    if (wrapper) {
+      wrapper.classList.toggle('toggled');
+    }
+  }
 
 }

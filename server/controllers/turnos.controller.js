@@ -115,7 +115,7 @@ module.exports = {
             }
 
             if (resultado.rowCount == 0) {
-                return res.status(500).json({ error: 'No se encontró ningun turno para asignar.' });
+                return res.status(200).json({ error: 'No se encontró ningun turno para asignar.' });
             }
 
             try {

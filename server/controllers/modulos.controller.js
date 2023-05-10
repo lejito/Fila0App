@@ -20,7 +20,7 @@ module.exports = {
             );
 
             if (resultado.rowCount == 0) {
-                return res.status(401).json({ error: 'Los datos de inicio de sesión son inválidos.' });
+                return res.status(200).json({ error: 'Los datos de inicio de sesión son inválidos.' });
             }
             else {
                 const moduloEncontrado = cambiarNotacion(resultado.rows[0]);

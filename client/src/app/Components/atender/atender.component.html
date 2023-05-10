@@ -1,0 +1,71 @@
+<div class="fondo container mt-5">
+  <div class="container capa">
+    <div class="columna mb-3">
+      <label class="texto">Turno en curso</label>
+      <div class="card">
+        <div class="card-body p-4">
+          <hr class="mt-0 mb-4" />
+          <div class="row pt-1">
+            <div class="col-6 mb-3">
+              <h6>Codigo</h6>
+              <p class="text-muted">{{ turno.codigo }}</p>
+            </div>
+            <div class="col-6 mb-3">
+              <h6>fecha de generacion</h6>
+              <p class="text-muted">{{ turno.fecha | date : "dd/MM/yyyy" }}</p>
+            </div>
+          </div>
+          <h6>Datos personales</h6>
+          <hr class="mt-0 mb-4" />
+          <div class="row pt-1">
+            <div class="col-6 mb-3">
+              <h6>Nombre</h6>
+              <p class="text-muted">
+                {{ turno.usuario?.primerNombre }}
+                {{ turno.usuario?.segundoNombre }}
+                {{ turno.usuario?.primerApellido }}
+                {{ turno.usuario?.segundoApellido }}
+              </p>
+            </div>
+            <div class="col-6 mb-3">
+              <h6>tipo de documento</h6>
+              <p class="text-muted">{{ turno.usuario?.tipoDocumento }}</p>
+            </div>
+            <div class="col-6 mb-3">
+              <h6>Documento</h6>
+              <p class="text-muted">
+                {{ turno.usuario?.numeroDocumento }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columna mb-3">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="align-self: center"
+        #bttnSiguiente
+      >
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary m-1"
+        style="align-self: center"
+        #bttnSiguiente
+      >
+        Completar
+      </button>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary w-25"
+      style="align-self: self-end"
+      #bttnSiguiente
+    >
+      Siguiente turno
+    </button>
+  </div>
+</div>

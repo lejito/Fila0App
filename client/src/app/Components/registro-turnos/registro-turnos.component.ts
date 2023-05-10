@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { timeout } from 'rxjs';
 import { TIPOS_DOCUMENTO } from 'src/app/Service/Global';
+import { TurnoService } from 'src/app/Service/turno.service';
 import { UsuarioService } from 'src/app/Service/usuario.service';
+import { Turno } from 'src/app/models/Turno';
 import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
@@ -10,6 +12,7 @@ import { Usuario } from 'src/app/models/Usuario';
   styleUrls: ['./registro-turnos.component.css'],
 })
 export class RegistroTurnosComponent implements OnInit {
+  public turno: Turno = new Turno(-1, '', '', '');
   public barValue = '0%';
   public progresoValor = 0;
   private usuarioActual = new Usuario(0, '', '', '', '', '', '');
@@ -18,7 +21,10 @@ export class RegistroTurnosComponent implements OnInit {
   public selecionado = '';
   public numeroDocumento = '';
   private tipoTurno = '';
-  constructor(private _usuarioService: UsuarioService) {
+  constructor(
+    private _usuarioService: UsuarioService,
+    private _turnoService: TurnoService
+  ) {
     this.tipos = TIPOS_DOCUMENTO;
   }
   ngOnInit(): void {
@@ -90,10 +96,12 @@ export class RegistroTurnosComponent implements OnInit {
           this.verificado = true;
           btn.innerHTML = 'Verificado';
           btn.style.background = 'green';
+          btn.style.borderColor = 'green';
         } else {
           btn.innerHTML = 'Verificar';
 
           btn.style.background = 'red';
+          btn.style.borderColor = 'red';
           if (this.verificado) {
             this.verificado = false;
             this.progresoValor -= 50;
@@ -101,5 +109,33 @@ export class RegistroTurnosComponent implements OnInit {
           }
         }
       });
+  }
+
+  generarTurno() {
+    let idStr = String(this.usuarioActual.id);
+    this._turnoService.registrar(idStr, this.tipoTurno).subscribe((resp) => {
+      if (resp) {
+        this.turno = resp;
+        setTimeout(() => {
+          this.resetearFormulario();
+        }, 3000);
+      }
+    });
+  }
+  resetearFormulario() {
+    this.progresoValor = 0;
+    this.barValue = '0%';
+    this.numeroDocumento = '';
+    this.selecionado = '';
+    this.verificado = false;
+    const opcionactivo = document.querySelector('.opcionTurno.activo');
+    const btnVerificar = document.getElementById('btnVerificar');
+    if (opcionactivo) {
+      opcionactivo.classList.remove('activo');
+    }
+    if (btnVerificar) {
+      btnVerificar.style.background = 'blue';
+      btnVerificar.style.borderColor = 'blue';
+    }
   }
 }

@@ -8,6 +8,8 @@ import { RegistroTurnosComponent } from './Components/registro-turnos/registro-t
 import { VizualizarTurnosComponent } from './Components/vizualizar-turnos/vizualizar-turnos.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PendientesComponent } from './components/pendientes/pendientes.component';
+import { AtenderComponent } from './Components/atender/atender.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     VizualizarTurnosComponent,
     RegistroTurnosComponent,
     GestionTurnosComponent,
+    PendientesComponent,
+    AtenderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

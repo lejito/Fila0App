@@ -33,6 +33,7 @@
         </div>
 
         <button
+          id="btnVerificar"
           type="submit"
           class="btn btn-primary"
           #bttnVerificar
@@ -44,19 +45,54 @@
       </form>
     </div>
     <div id="tab2" class="tab-panel row">
-      <div class="card opcionTurno" value="A">
+      <div class="card opcionTurno" id="A">
         <p>Turno tipo A</p>
       </div>
-      <div class="card opcionTurno" value="B">
+      <div class="card opcionTurno" id="B">
         <p>Turno tipo B</p>
       </div>
-      <div class="card opcionTurno" value="C">
+      <div class="card opcionTurno" id="C">
         <p>Turno tipo C</p>
       </div>
-      <div class="card opcionTurno" value="D">
+      <div class="card opcionTurno" id="D">
         <p>Turno tipo D</p>
       </div>
-      <div id="tab3" class="tab-panel">Contenido de la Pestaña 3</div>
+    </div>
+    <div id="tab3" class="tab-panel row">
+      <button
+        class="btnGenerar"
+        [disabled]="progresoValor != 100"
+        (click)="generarTurno()"
+      >
+        Generar turno
+      </button>
+      <div class="card" *ngIf="progresoValor != 100">
+        <p class="textoGenerar">
+          Termine los pasos anteriores para obtener el 100% de los datos
+          requeridos para generar su turno
+        </p>
+      </div>
+      <div class="card" *ngIf="progresoValor == 100">
+        <div class="card-body p-4">
+          <h6>Informacion ultimo turno generado</h6>
+          <hr class="mt-0 mb-4" />
+          <div class="row pt-1">
+            <div class="col-6 mb-3">
+              <h6>Codigo</h6>
+              <p class="text-muted">{{ turno.codigo }}</p>
+            </div>
+            <div class="col-6 mb-3">
+              <h6>estado</h6>
+              <p class="text-muted">{{ turno.estado }}</p>
+            </div>
+          </div>
+          <h6>fecha de generacion</h6>
+          <hr class="mt-0 mb-4" />
+          <div class="row pt-1">
+            {{ turno.fecha | date : "dd/MM/yyyy" }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="progress mt-1" style="height: 0.7rem">
       <div
@@ -66,7 +102,9 @@
         aria-valuemin="0"
         aria-valuemax="100"
         [ngStyle]="{ width: barValue }"
-      ></div>
+      >
+        {{ barValue }}
+      </div>
     </div>
   </div>
 </div>

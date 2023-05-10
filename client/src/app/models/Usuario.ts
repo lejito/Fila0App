@@ -1,6 +1,6 @@
 export class Usuario {
   constructor(
-    public _id: number,
+    public id: number,
     public tipoDocumento: string,
     public numeroDocumento: string,
     public primerNombre: string,

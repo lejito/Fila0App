@@ -1,7 +1,7 @@
 .texto{
    
         color: rgb(107, 107, 107);
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: var(--texto_titulo);
         font-size: x-large;
         font-weight: 400;
       

@@ -1,1 +1,125 @@
-<p>gestion-turnos works!</p>
+<div class="fondo container mt-5 h-75" [hidden]="moduloActivo">
+  <div class="container capa">
+    <div class="columna mb-3">
+      <label class="form-label">Usuario</label>
+      <input
+        type="text"
+        class="form-control"
+        name="usuario"
+        #Usuario
+        [(ngModel)]="usuario"
+        (focus)="negado = false"
+      />
+    </div>
+    <div class="columna mb-3">
+      <label class="form-label">Clave</label>
+      <input
+        type="password"
+        class="form-control"
+        name="numeroDocu"
+        [(ngModel)]="clave"
+        (focus)="negado = false"
+        #Clave
+      />
+      <div class="msg-error" [hidden]="!negado">
+        Ingreso negado, datos erroneos
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-25"
+      style="align-self: center"
+      #bttnVerificar
+      [disabled]="!Clave.value || !Usuario.value"
+      (click)="verificar(bttnVerificar)"
+    >
+      Ingresar
+    </button>
+  </div>
+</div>
+<div id="wrapper" [hidden]="!moduloActivo">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <span class="navbar-brand texto">Modulo {{ modulo }}</span>
+      </li>
+      <li>
+        <a
+          class="nav-link rounded-5"
+          [routerLink]="'Atender'"
+          [routerLinkActive]="['active']"
+        >
+          Atender turno
+        </a>
+      </li>
+      <li>
+        <a
+          class="nav-link rounded-5"
+          [routerLink]="'Pendientes'"
+          [routerLinkActive]="['active']"
+        >
+          Turnos pendientes
+        </a>
+      </li>
+      <li>
+        <div
+          class="nav-link rounded-5"
+          style="cursor: pointer"
+          (click)="cerrar()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            class="bi bi-power"
+            viewBox="0 0 16 16"
+          >
+            <path d="M7.5 1v7h1V1h-1z" />
+            <path
+              d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"
+            />
+          </svg>
+          Cerrar Modulo
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <button
+            class="btn"
+            style="background: var(--principal_contraste)"
+            #btn
+            id="menu-toggle"
+            (click)="toggle(btn)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              class="bi bi-arrow-left-square"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
+              />
+            </svg>
+          </button>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->

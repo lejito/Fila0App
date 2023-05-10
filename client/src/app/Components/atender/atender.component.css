@@ -1,0 +1,8 @@
+.textoInfo{
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--texto_principal);
+    font-weight: 700;
+    font-size: xx-large;
+   }
+   

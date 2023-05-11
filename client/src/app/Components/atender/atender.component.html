@@ -1,69 +1,160 @@
 <div class="fondo container mt-5">
   <div class="container capa">
+    <div class="seleccion-categoria mb-2">
+      <h5 style="text-align: center">Categoría de atención</h5>
+      <div class="radio-input">
+        <label>
+          <input
+            type="radio"
+            name="categoria"
+            value="N/A"
+            [(ngModel)]="categoria"
+          />
+          <span>Cualquiera</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="categoria"
+            value="A"
+            [(ngModel)]="categoria"
+          />
+          <span>A</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="categoria"
+            value="B"
+            [(ngModel)]="categoria"
+          />
+          <span>B</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="categoria"
+            value="C"
+            [(ngModel)]="categoria"
+          />
+          <span>C</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="categoria"
+            value="D"
+            [(ngModel)]="categoria"
+          />
+          <span>D</span>
+        </label>
+        <span class="selection"></span>
+      </div>
+    </div>
+
     <div class="columna mb-3">
       <label class="texto">Turno en curso</label>
-      <div class="card">
+      <div class="card" [hidden]="!turnoActual">
         <div class="card-body p-4">
+          <h6>Datos del turno</h6>
           <hr class="mt-0 mb-4" />
           <div class="row pt-1">
             <div class="col-6 mb-3">
-              <h6>Codigo</h6>
+              <h6>ID único</h6>
+              <p class="text-muted">{{ turno.id }}</p>
+            </div>
+            <div class="col-6 mb-3">
+              <h6>Código</h6>
               <p class="text-muted">{{ turno.codigo }}</p>
             </div>
             <div class="col-6 mb-3">
-              <h6>fecha de generacion</h6>
-              <p class="text-muted">{{ turno.fecha | date : "dd/MM/yyyy" }}</p>
-            </div>
-          </div>
-          <h6>Datos personales</h6>
-          <hr class="mt-0 mb-4" />
-          <div class="row pt-1">
-            <div class="col-6 mb-3">
-              <h6>Nombre</h6>
+              <h6>Fecha de generación</h6>
               <p class="text-muted">
-                {{ turno.usuario?.primerNombre }}
-                {{ turno.usuario?.segundoNombre }}
-                {{ turno.usuario?.primerApellido }}
-                {{ turno.usuario?.segundoApellido }}
+                {{ turno.fecha | date : "dd/MM/yyyy HH:mm:ss" }}
               </p>
             </div>
             <div class="col-6 mb-3">
-              <h6>tipo de documento</h6>
-              <p class="text-muted">{{ turno.usuario?.tipoDocumento }}</p>
+              <h6>Fecha de asignación</h6>
+              <p class="text-muted">
+                {{ turno.fechaAsignado | date : "dd/MM/yyyy HH:mm:ss" }}
+              </p>
             </div>
-            <div class="col-6 mb-3">
+          </div>
+          <h6>Datos del usuario</h6>
+          <hr class="mt-0 mb-4" />
+          <div class="row pt-1">
+            <div class="col-4 mb-3">
               <h6>Documento</h6>
               <p class="text-muted">
-                {{ turno.usuario?.numeroDocumento }}
+                {{ turno.tipoDocumento }} {{ turno.numeroDocumento }}
+              </p>
+            </div>
+            <div class="col-8 mb-3">
+              <h6>Nombre</h6>
+              <p class="text-muted">
+                {{ turno.primerNombre }} {{ turno.segundoNombre }}
+                {{ turno.primerApellido }} {{ turno.segundoApellido }}
               </p>
             </div>
           </div>
         </div>
+        <div class="m-3">
+          <button
+            type="submit"
+            class="btn btn-primary me-2"
+            style="align-self: center"
+            [hidden]="turnoEnCurso"
+            (click)="actualizarEstado('En curso')"
+            #btnEnCurso
+          >
+            Marcar en curso
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success me-2"
+            style="align-self: center"
+            [hidden]="!turnoEnCurso"
+            (click)="actualizarEstado('Completado')"
+            #btnCompletar
+          >
+            Completar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-danger me-2"
+            style="align-self: center"
+            [hidden]="!turnoEnCurso"
+            (click)="actualizarEstado('Cancelado')"
+            #btnCancelar
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-warning"
+            style="align-self: center"
+            [hidden]="!turnoEnCurso"
+            (click)="devolverAPendientes()"
+            #btnCancelar
+          >
+            Devolver a pendientes
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="columna mb-3">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        style="align-self: center"
-        #bttnSiguiente
-      >
-        Cancelar
-      </button>
-      <button
-        type="submit"
-        class="btn btn-primary m-1"
-        style="align-self: center"
-        #bttnSiguiente
-      >
-        Completar
-      </button>
+
+      <div class="card" [hidden]="turnoActual">
+        <div class="card-body p-4">
+          <h6>No estás atendiendo ningún turno actualmente.</h6>
+        </div>
+      </div>
     </div>
     <button
       type="submit"
       class="btn btn-primary w-25"
-      style="align-self: self-end"
-      #bttnSiguiente
+      style="align-self: self-end; margin: 0 auto"
+      [disabled]="turnoActual"
+      (click)="siguienteTurno()"
+      #btnSiguiente
     >
       Siguiente turno
     </button>

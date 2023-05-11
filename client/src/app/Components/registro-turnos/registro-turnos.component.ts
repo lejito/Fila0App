@@ -118,7 +118,7 @@ export class RegistroTurnosComponent implements OnInit {
         this.turno = resp;
         setTimeout(() => {
           this.resetearFormulario();
-        }, 3000);
+        }, 5000);
       }
     });
   }

@@ -1,6 +1,6 @@
 <div class="tabset container pt-3 pb-1 mt-5 shadow-lg">
   <ul class="tabset-nav">
-    <li><a id="#tab1" class="active">Validar datos</a></li>
+    <li><a id="#tab1" class="active">Ingresar datos</a></li>
     <li><a id="#tab2">Elegir tipo de turno</a></li>
     <li><a id="#tab3">Generar turno</a></li>
   </ul>
@@ -15,7 +15,7 @@
             name="role"
             [(ngModel)]="selecionado"
           >
-            <option value="" disabled selected>Elija un tipo</option>
+            <option value="" disabled selected>Elegir un tipo</option>
             <option *ngFor="let tipo of tipos" [value]="tipo">
               {{ tipo }}
             </option>
@@ -68,28 +68,27 @@
       </button>
       <div class="card" *ngIf="progresoValor != 100">
         <p class="textoGenerar">
-          Termine los pasos anteriores para obtener el 100% de los datos
-          requeridos para generar su turno
+          Es necesario terminar los pasos anteriores para generar el turno.
         </p>
       </div>
       <div class="card" *ngIf="progresoValor == 100">
         <div class="card-body p-4">
-          <h6>Informacion ultimo turno generado</h6>
+          <h6>Informacion del último turno generado</h6>
           <hr class="mt-0 mb-4" />
           <div class="row pt-1">
             <div class="col-6 mb-3">
-              <h6>Codigo</h6>
+              <h6>Código</h6>
               <p class="text-muted">{{ turno.codigo }}</p>
             </div>
             <div class="col-6 mb-3">
-              <h6>estado</h6>
+              <h6>Estado</h6>
               <p class="text-muted">{{ turno.estado }}</p>
             </div>
           </div>
-          <h6>fecha de generacion</h6>
+          <h6>Fecha de generación</h6>
           <hr class="mt-0 mb-4" />
           <div class="row pt-1">
-            {{ turno.fecha | date : "dd/MM/yyyy" }}
+            {{ turno.fecha | date : "dd/MM/yyyy HH:mm:ss" }}
           </div>
         </div>
       </div>

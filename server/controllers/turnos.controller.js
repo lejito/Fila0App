@@ -31,7 +31,7 @@ module.exports = {
     async buscarPendientes(req, res) {
         try {
             const consulta = `
-                SELECT turnos.id, turnos.codigo, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
+                SELECT turnos.id, turnos.codigo, turnos.fecha, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
                 FROM turnos
                 INNER JOIN usuarios ON usuarios.id = turnos.usuario
                 WHERE turnos.estado = 'Pendiente'
@@ -58,7 +58,7 @@ module.exports = {
                 INNER JOIN usuarios ON usuarios.id = turnos.usuario
                 WHERE turnos.estado = 'Asignado'
                 ORDER BY turnos.fecha_asignado DESC
-                LIMIT 10
+                LIMIT 8
             `
             const resultado = await pool.query(
                 consulta
@@ -122,7 +122,7 @@ module.exports = {
                 const idTurnoAsignado = resultado.rows[0].id;
 
                 const consulta2 = `
-                    SELECT turnos.id, turnos.codigo, turnos.modulo, turnos.fecha_asignado, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
+                    SELECT turnos.id, turnos.codigo, turnos.modulo, turnos.fecha, turnos.fecha_asignado, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
                     FROM turnos
                     INNER JOIN usuarios ON usuarios.id = turnos.usuario
                     WHERE turnos.id = $1

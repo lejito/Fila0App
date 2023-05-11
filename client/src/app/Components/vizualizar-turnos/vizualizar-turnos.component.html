@@ -1,1 +1,34 @@
-<p>vizualizar-turnos works!</p>
+<div class="tabset container pt-3 pb-3 pb-1 mt-5 shadow-lg">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let turno of turnosAsignados">
+      <div class="card__ p-0">
+        <div class="card__header">
+          <span class="card__title">{{ turno.codigo }}</span>
+        </div>
+        <div class="card__descr-wrapper">
+					<p class="card__subtitle">Módulo {{ turno.modulo }}</p>
+          <p class="card__descr">
+            <b>Documento:</b> {{ turno.tipoDocumento }}
+            {{ turno.numeroDocumento }}
+          </p>
+          <p class="card__descr">
+            <b>Nombre:</b> {{ turno.primerNombre }} {{ turno.segundoNombre }}
+            {{ turno.primerApellido }} {{ turno.segundoApellido }}
+          </p>
+          <div class="card__links">
+            <div>
+              <span><b>Fecha:</b> {{ turno.fechaAsignado | date : "dd/MM/yyyy" }}</span>
+            </div>
+						<div>
+              <span><b>Hora:</b> {{ turno.fechaAsignado | date : "HH:mm:ss" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio #audioTurno>
+	<source src="../../../assets/turno.mp3" type="audio/mpeg">
+</audio>

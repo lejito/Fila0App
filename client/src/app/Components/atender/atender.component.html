@@ -98,31 +98,63 @@
             </div>
           </div>
         </div>
+        <div class="m-3">
+          <button
+            type="submit"
+            class="btn btn-primary me-2"
+            style="align-self: center"
+            [hidden]="turnoEnCurso"
+            (click)="actualizarEstado('En curso')"
+            #btnEnCurso
+          >
+            Marcar en curso
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success me-2"
+            style="align-self: center"
+            [hidden]="!turnoEnCurso"
+            (click)="actualizarEstado('Completado')"
+            #btnCompletar
+          >
+            Completar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-danger me-2"
+            style="align-self: center"
+            [hidden]="!turnoEnCurso"
+            (click)="actualizarEstado('Cancelado')"
+            #btnCancelar
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-warning"
+            style="align-self: center"
+            [hidden]="!turnoEnCurso"
+            (click)="devolverAPendientes()"
+            #btnCancelar
+          >
+            Devolver a pendientes
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="columna mb-3">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        style="align-self: center"
-        #bttnSiguiente
-      >
-        Cancelar
-      </button>
-      <button
-        type="submit"
-        class="btn btn-primary m-1"
-        style="align-self: center"
-        #bttnSiguiente
-      >
-        Completar
-      </button>
+
+      <div class="card" [hidden]="turnoActual">
+        <div class="card-body p-4">
+          <h6>No estás atendiendo ningún turno actualmente.</h6>
+        </div>
+      </div>
     </div>
     <button
       type="submit"
       class="btn btn-primary w-25"
-      style="align-self: self-end"
-      #bttnSiguiente
+      style="align-self: self-end; margin: 0 auto"
+      [disabled]="turnoActual"
+      (click)="siguienteTurno()"
+      #btnSiguiente
     >
       Siguiente turno
     </button>

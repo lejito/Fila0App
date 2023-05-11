@@ -1,90 +1,217 @@
 /* Estilos para el contenedor principal */
 .tabset {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    
-    background-color: #eee;
-  }
-  
-  /* Estilos para las pestañas */
-  .tabset-nav {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .tabset-nav li {
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .tabset-nav a {
-    display: block;
-    padding: 10px;
-    background-color: var(--principal);
-    color: #333;
-    border-radius: 5px 5px 0 0;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .tabset-nav a.active {
-    background-color:var(--fondo_verde);
-    border-bottom: 1px solid #fff;
-  }
-  
-  /* Estilos para los paneles de contenido */
-  .tabset-panels {
-    padding: 10px;
-    background-color: var(--fondo_gris);
-    border-radius: 5px 5px 5px 5px;
-  }
-  
-  .tab-panel {
-    display: none;
-    
-  }
-  
-  .tab-panel.active {
-    display: flex;
-    min-height: 60vh;
-    max-height: 68vh;
-    justify-content: center;
-    padding: 3rem;
-  }
-  .opcionTurno{
-    cursor: pointer;
-    margin: 0.2rem;
-    text-align: center;
-    padding: 1.5rem;
-    color: black;
-    font-family: var(--texto_titulo);
-    font-size: x-large;
-    font-weight: 400;
-  }
-  
-  .opcionTurno:hover{
-    border: 0.1rem solid blue;
-  }
- .activo{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  background-color: #eee;
+}
+
+/* Estilos para las pestañas */
+.tabset-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabset-nav li {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tabset-nav a {
+  display: block;
+  padding: 10px;
+  background-color: var(--principal);
+  color: #333;
+  border-radius: 5px 5px 0 0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tabset-nav a.active {
+  background-color: var(--fondo_verde);
+  border-bottom: 1px solid #fff;
+}
+
+/* Estilos para los paneles de contenido */
+.tabset-panels {
+  padding: 10px;
+  background-color: var(--fondo_gris);
+  border-radius: 5px 5px 5px 5px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: flex;
+  min-height: 60vh;
+  max-height: 68vh;
+  justify-content: center;
+  padding: 3rem;
+}
+.opcionTurno {
+  cursor: pointer;
+  margin: 0.2rem;
+  text-align: center;
+  padding: 1.5rem;
+  color: black;
+  font-family: var(--texto_titulo);
+  font-size: x-large;
+  font-weight: 400;
+}
+
+.opcionTurno:hover {
   border: 0.1rem solid blue;
- }
- .btnGenerar{
+}
+.activo {
+  border: 0.1rem solid blue;
+}
+.btnGenerar {
   margin: 1.5rem;
   font-family: var(--texto_principal);
-  font-size:xx-large;
+  font-size: xx-large;
   font-weight: 800;
   border-radius: 5rem;
   box-shadow: #333;
   border: 0.1rem solid var(--color_texto);
-  background: rgba(0,250,210,0.7);
- }
- .textoGenerar{
+  background: rgba(0, 250, 210, 0.7);
+}
+.textoGenerar {
   text-align: center;
   padding: 2rem;
   font-family: var(--texto_principal);
   font-weight: 700;
   font-size: xx-large;
- }
- 
+}
+
+.plan-card {
+  background: #fff;
+  width: 20rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  border-bottom: 4px solid #000446;
+  box-shadow: 0 6px 30px rgba(207, 212, 222, 0.3);
+  font-family: "Poppins", sans-serif;
+}
+
+.plan-card h2 {
+  margin-bottom: 15px;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.plan-card h2 span {
+  display: block;
+  margin-top: -4px;
+  color: #4d4d4d;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.etiquet-price {
+  position: relative;
+  background: var(--principal);
+  width: 19.5rem;
+  margin-left: -0.65rem;
+  padding: 0.2rem 1.2rem;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #000446;
+}
+
+.etiquet-price p {
+  margin: 0;
+  padding-top: 0.4rem;
+  display: flex;
+  font-size: 1.9rem;
+  font-weight: 500;
+}
+
+.etiquet-price p:before {
+  content: "CÓDIGO";
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.etiquet-price p:after {
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.etiquet-price div {
+  position: absolute;
+  bottom: -23px;
+  right: 0px;
+  width: 0;
+  height: 0;
+  border-top: 13px solid var(--principal_oscuro);
+  border-bottom: 10px solid transparent;
+  border-right: 13px solid transparent;
+  z-index: 0;
+}
+
+.benefits-list {
+  margin-top: 16px;
+}
+
+.benefits-list ul {
+  padding: 0;
+  font-size: 14px;
+}
+
+.benefits-list ul li {
+  color: #4d4d4d;
+  list-style: none;
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.benefits-list ul li svg {
+  width: 0.9rem;
+  fill: currentColor;
+}
+
+.benefits-list ul li span {
+  font-weight: 300;
+}
+
+.button-get-plan {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.button-get-plan a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000446;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.button-get-plan a:hover {
+  transform: translateY(-3%);
+  box-shadow: 0 3px 10px rgba(207, 212, 222, 0.9);
+}
+
+.button-get-plan .svg-rocket {
+  margin-right: 10px;
+  width: 0.9rem;
+  fill: currentColor;
+}

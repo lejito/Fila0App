@@ -8,8 +8,10 @@ import { RegistroTurnosComponent } from './Components/registro-turnos/registro-t
 import { VizualizarTurnosComponent } from './Components/vizualizar-turnos/vizualizar-turnos.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PendientesComponent } from './components/pendientes/pendientes.component';
+import { PendientesComponent } from './Components/pendientes/pendientes.component';
 import { AtenderComponent } from './Components/atender/atender.component';
+import { CompletadosComponent } from './Components/completados/completados.component';
+import { CanceladosComponent } from './Components/cancelados/cancelados.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AtenderComponent } from './Components/atender/atender.component';
     GestionTurnosComponent,
     PendientesComponent,
     AtenderComponent,
+    CompletadosComponent,
+    CanceladosComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

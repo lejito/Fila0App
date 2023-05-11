@@ -30,6 +30,7 @@ CREATE TABLE turnos(
 	codigo VARCHAR(6) NOT NULL,
   estado estado_turno NOT NULL DEFAULT 'Pendiente',
   fecha_asignado TIMESTAMP NULL,
+  fecha_cambio TIMESTAMP NULL,
 	CONSTRAINT turnos_pk PRIMARY KEY (id)
 );
 

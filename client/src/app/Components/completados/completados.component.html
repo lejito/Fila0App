@@ -1,6 +1,6 @@
 <div class="tabset container pt-3 pb-3 pb-1 mt-5 shadow-lg">
   <div class="row row-cols-1 row-cols-md-4 g-4">
-    <div class="col" *ngFor="let turno of turnosPendientes">
+    <div class="col" *ngFor="let turno of turnosCompletados">
       <div class="card__ p-0">
         <div class="card__header">
           <span class="card__title">{{ turno.codigo }}</span>
@@ -17,10 +17,15 @@
           </p>
           <div class="card__links">
             <div>
-              <span><b>Fecha:</b> {{ turno.fecha | date : "dd/MM/yyyy" }}</span>
+              <span
+                ><b>Fecha:</b>
+                {{ turno.fechaCambio | date : "dd/MM/yyyy" }}</span
+              >
             </div>
             <div>
-              <span><b>Hora:</b> {{ turno.fecha | date : "HH:mm:ss" }}</span>
+              <span>
+                <b>Hora:</b> {{ turno.fechaCambio | date : "HH:mm:ss" }}
+              </span>
             </div>
           </div>
         </div>

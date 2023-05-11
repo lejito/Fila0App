@@ -3,8 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { VizualizarTurnosComponent } from './Components/vizualizar-turnos/vizualizar-turnos.component';
 import { GestionTurnosComponent } from './Components/gestion-turnos/gestion-turnos.component';
 import { RegistroTurnosComponent } from './Components/registro-turnos/registro-turnos.component';
-import { PendientesComponent } from './components/pendientes/pendientes.component';
 import { AtenderComponent } from './Components/atender/atender.component';
+import { PendientesComponent } from './Components/pendientes/pendientes.component';
+import { CompletadosComponent } from './Components/completados/completados.component';
+import { CanceladosComponent } from './Components/cancelados/cancelados.component';
+
 
 const routes: Routes = [
   {
@@ -17,8 +20,11 @@ const routes: Routes = [
     path: 'Gestion',
     component: GestionTurnosComponent,
     children: [
-      { path: 'Pendientes', component: PendientesComponent },
       { path: 'Atender', component: AtenderComponent },
+      { path: 'Pendientes', component: PendientesComponent },
+      { path: 'Completados', component: CompletadosComponent },
+      { path: 'Cancelados', component: CanceladosComponent },
+
     ],
   },
   { path: 'Registro', component: RegistroTurnosComponent },

@@ -72,6 +72,50 @@ module.exports = {
         }
     },
 
+    async buscarCompletados(req, res) {
+        try {
+            const consulta = `
+                SELECT turnos.id, turnos.codigo, turnos.modulo, turnos.fecha_cambio, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
+                FROM turnos
+                INNER JOIN usuarios ON usuarios.id = turnos.usuario
+                WHERE turnos.estado = 'Completado'
+                ORDER BY turnos.fecha_cambio DESC
+                LIMIT 32
+            `
+            const resultado = await pool.query(
+                consulta
+            );
+
+            const turnosCompletados = cambiarNotacion(resultado.rows);
+
+            return res.status(200).json(turnosCompletados);
+        } catch (error) {
+            return res.status(500).json({ error: 'Ha ocurrido un error al intentar buscar los últimos turnos completados.' });
+        }
+    },
+
+    async buscarCancelados(req, res) {
+        try {
+            const consulta = `
+                SELECT turnos.id, turnos.codigo, turnos.modulo, turnos.fecha_cambio, usuarios.tipo_documento, usuarios.numero_documento, usuarios.primer_nombre, usuarios.segundo_nombre, usuarios.primer_apellido, usuarios.segundo_apellido 
+                FROM turnos
+                INNER JOIN usuarios ON usuarios.id = turnos.usuario
+                WHERE turnos.estado = 'Cancelado'
+                ORDER BY turnos.fecha_cambio DESC
+                LIMIT 32
+            `
+            const resultado = await pool.query(
+                consulta
+            );
+
+            const turnosCancelados = cambiarNotacion(resultado.rows);
+
+            return res.status(200).json(turnosCancelados);
+        } catch (error) {
+            return res.status(500).json({ error: 'Ha ocurrido un error al intentar buscar los últimos turnos cancelados.' });
+        }
+    },
+
     async asignar(req, res) {
         try {
             const { modulo, categoria } = req.body;
@@ -153,7 +197,7 @@ module.exports = {
             const { id, modulo, estado } = req.body;
             const consulta = `
                 UPDATE turnos 
-                SET estado = $1, modulo = $2
+                SET estado = $1, modulo = $2, fecha_cambio = CURRENT_TIMESTAMP
                 WHERE id = $3
                 RETURNING id
             `

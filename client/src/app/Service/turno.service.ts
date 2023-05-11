@@ -33,6 +33,18 @@ export class  TurnoService {
       headers: headers,
     });
   }
+  buscarCompletados(): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.get(`${this.url}buscarCompletados`, {
+      headers: headers,
+    });
+  }
+  buscarCancelados(): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.get(`${this.url}buscarCancelados`, {
+      headers: headers,
+    });
+  }
   asignar(modulo: string, categoria: string): Observable<any> {
     let params = JSON.stringify({ modulo: modulo, categoria: categoria });
     let headers = new HttpHeaders().set('Content-Type', 'application/json');

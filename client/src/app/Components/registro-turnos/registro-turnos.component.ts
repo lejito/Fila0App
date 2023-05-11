@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { timeout } from 'rxjs';
 import { TIPOS_DOCUMENTO } from 'src/app/Service/Global';
 import { TurnoService } from 'src/app/Service/turno.service';
 import { UsuarioService } from 'src/app/Service/usuario.service';
@@ -13,6 +12,7 @@ import { Usuario } from 'src/app/models/Usuario';
 })
 export class RegistroTurnosComponent implements OnInit {
   public turno: Turno = new Turno(-1, '', '', '');
+  public turnoGenerado = false;
   public barValue = '0%';
   public progresoValor = 0;
   private usuarioActual = new Usuario(0, '', '', '', '', '', '');
@@ -111,17 +111,21 @@ export class RegistroTurnosComponent implements OnInit {
       });
   }
 
-  generarTurno() {
+  generarTurno(btn: HTMLButtonElement) {
+    btn.disabled = true;
     let idStr = String(this.usuarioActual.id);
     this._turnoService.registrar(idStr, this.tipoTurno).subscribe((resp) => {
       if (resp) {
         this.turno = resp;
+        this.turnoGenerado = true;
         setTimeout(() => {
+          this.turnoGenerado = false;
           this.resetearFormulario();
         }, 5000);
       }
     });
   }
+
   resetearFormulario() {
     this.progresoValor = 0;
     this.barValue = '0%';

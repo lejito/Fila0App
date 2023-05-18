@@ -1,14 +1,13 @@
-CREATE TYPE tipo_documento AS ENUM ('CC', 'TI', 'CE', 'PP');
-
 CREATE TABLE usuarios(
 	id SERIAL NOT NULL,
-	tipo_documento tipo_documento NOT NULL,
+	tipo_documento VARCHAR(2) NOT NULL,
 	numero_documento VARCHAR(10) NOT NULL,
 	primer_nombre VARCHAR(20) NOT NULL,
 	segundo_nombre VARCHAR(20) NULL,
 	primer_apellido VARCHAR(20) NOT NULL,
 	segundo_apellido VARCHAR(20) NULL,
 	CONSTRAINT usuarios_pk PRIMARY KEY (id),
+  CONSTRAINT usuarios_ck_tipo_documento CHECK (tipo_documento IN ('TI', 'CC', 'CE', 'PP')),
 	CONSTRAINT usuarios_uq_documento UNIQUE (tipo_documento, numero_documento)
 );
 
@@ -19,8 +18,6 @@ CREATE TABLE modulos(
 	CONSTRAINT modulos_pk PRIMARY KEY (id)
 );
 
-CREATE TYPE estado_turno AS ENUM ('Pendiente', 'Asignado', 'En curso', 'Completado', 'Cancelado');
-
 CREATE TABLE turnos(
 	id SERIAL NOT NULL,
 	usuario INTEGER NOT NULL,
@@ -28,10 +25,11 @@ CREATE TABLE turnos(
 	fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	categoria VARCHAR(3) NOT NULL,
 	codigo VARCHAR(6) NOT NULL,
-  estado estado_turno NOT NULL DEFAULT 'Pendiente',
+  estado VARCHAR(10) NOT NULL DEFAULT 'Pendiente',
   fecha_asignado TIMESTAMP NULL,
   fecha_cambio TIMESTAMP NULL,
-	CONSTRAINT turnos_pk PRIMARY KEY (id)
+	CONSTRAINT turnos_pk PRIMARY KEY (id),
+  CONSTRAINT turnos_ck_estado CHECK (estado IN ('Pendiente', 'Asignado', 'En curso', 'Completado', 'Cancelado'))
 );
 
 ALTER TABLE turnos

@@ -54,7 +54,7 @@
 
     <div class="columna mb-3">
       <label class="texto">Turno en curso</label>
-      <div class="card" [hidden]="!turnoActual">
+      <div class="card" *ngIf="turnoActual">
         <div class="card-body p-4">
           <h6>Datos del turno</h6>
           <hr class="mt-0 mb-4" />
@@ -103,7 +103,7 @@
             type="submit"
             class="btn btn-primary me-2"
             style="align-self: center"
-            [hidden]="turnoEnCurso"
+            *ngIf="!turnoEnCurso"
             (click)="actualizarEstado('En curso')"
             #btnEnCurso
           >
@@ -113,7 +113,7 @@
             type="submit"
             class="btn btn-success me-2"
             style="align-self: center"
-            [hidden]="!turnoEnCurso"
+            *ngIf="turnoEnCurso"
             (click)="actualizarEstado('Completado')"
             #btnCompletar
           >
@@ -123,7 +123,7 @@
             type="submit"
             class="btn btn-danger me-2"
             style="align-self: center"
-            [hidden]="!turnoEnCurso"
+            *ngIf="turnoEnCurso"
             (click)="actualizarEstado('Cancelado')"
             #btnCancelar
           >
@@ -133,7 +133,7 @@
             type="submit"
             class="btn btn-warning"
             style="align-self: center"
-            [hidden]="!turnoEnCurso"
+            *ngIf="turnoEnCurso"
             (click)="devolverAPendientes()"
             #btnCancelar
           >

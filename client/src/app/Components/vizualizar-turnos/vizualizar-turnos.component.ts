@@ -40,6 +40,7 @@ export class VizualizarTurnosComponent implements OnInit, OnDestroy {
         } else if (!this.alertaMostrada) {
           this._alertService.showAlert(res);
           this.alertaMostrada = true;
+          this.turnosAsignados = [];
         }
       });
   }

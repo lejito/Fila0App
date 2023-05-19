@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/Service/alert.service';
 import { TurnoService } from 'src/app/Service/turno.service';
 import { Turno } from 'src/app/models/Turno';
 import { Usuario } from 'src/app/models/Usuario';
@@ -9,20 +10,24 @@ import { Usuario } from 'src/app/models/Usuario';
   styleUrls: ['./atender.component.css'],
 })
 export class AtenderComponent implements OnInit {
-  constructor(private _turnoService: TurnoService) {}
+  constructor(
+    private _alertService: AlertService,
+    private _turnoService: TurnoService
+  ) {}
 
   public turnoVacio = {
-    id: null,
-    codigo: null,
-    modulo: null,
-    fecha: null,
-    fechaAsignado: null,
-    tipoDocumento: null,
-    numeroDocumento: null,
-    primerNombre: null,
-    segundoNombre: null,
-    primerApellido: null,
-    segundoApellido: null,
+    id: 0,
+    codigo: 0,
+    modulo: 0,
+    fecha: 'null',
+    estado: 'null',
+    fechaAsignado: 'null',
+    tipoDocumento: 'null',
+    numeroDocumento: 'null',
+    primerNombre: 'null',
+    segundoNombre: 'null',
+    primerApellido: 'null',
+    segundoApellido: 'null',
   };
   public turno = this.turnoVacio;
   public categoria = 'N/A';
@@ -35,6 +40,7 @@ export class AtenderComponent implements OnInit {
     if (turnoActual) {
       this.turno = JSON.parse(turnoActual);
       this.turnoActual = true;
+      this.turnoEnCurso = this.turno.estado == 'En curso';
     }
   }
 
@@ -43,10 +49,12 @@ export class AtenderComponent implements OnInit {
     if (!modulo) return;
 
     this._turnoService.asignar(modulo, this.categoria).subscribe((res) => {
-      if (!res.error) {
+      if (!res.error && !res.warning) {
         this.turno = res;
         this.turnoActual = true;
         localStorage.setItem('TURNO', JSON.stringify(this.turno));
+      } else {
+        this._alertService.showAlert(res);
       }
     });
   }
@@ -59,13 +67,17 @@ export class AtenderComponent implements OnInit {
     this._turnoService
       .actualizarEstado(JSON.parse(turno).id, modulo, estado)
       .subscribe((res) => {
-        if (!res.error) {
+        if (!res.error && !res.warning) {
+          this.turno.estado = estado;
+          localStorage.setItem('TURNO', JSON.stringify(this.turno));
           if (estado == 'En curso') {
             this.turnoActual = true;
             this.turnoEnCurso = true;
           } else {
             this.reiniciar();
           }
+        } else {
+          this._alertService.showAlert(res);
         }
       });
   }
@@ -78,8 +90,10 @@ export class AtenderComponent implements OnInit {
     this._turnoService
       .devolverAPendientes(JSON.parse(turno).id)
       .subscribe((res) => {
-        if (!res.error) {
+        if (!res.error && !res.warning) {
           this.reiniciar();
+        } else {
+          this._alertService.showAlert(res);
         }
       });
   }

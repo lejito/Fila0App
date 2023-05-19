@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TIPOS_DOCUMENTO } from 'src/app/Service/Global';
+import { AlertService } from 'src/app/Service/alert.service';
 import { TurnoService } from 'src/app/Service/turno.service';
 import { UsuarioService } from 'src/app/Service/usuario.service';
 import { Turno } from 'src/app/models/Turno';
@@ -22,6 +23,7 @@ export class RegistroTurnosComponent implements OnInit {
   public numeroDocumento = '';
   private tipoTurno = '';
   constructor(
+    private _alertService: AlertService,
     private _usuarioService: UsuarioService,
     private _turnoService: TurnoService
   ) {
@@ -79,7 +81,7 @@ export class RegistroTurnosComponent implements OnInit {
     this._usuarioService
       .validarIngreso(this.selecionado, this.numeroDocumento)
       .subscribe((resp) => {
-        if (!resp.error) {
+        if (!resp.error && !resp.warning) {
           this.usuarioActual = resp;
           if (this.verificado) {
             this.progresoValor -= 50;
@@ -91,13 +93,14 @@ export class RegistroTurnosComponent implements OnInit {
           } else {
             this.progresoValor += 50;
             this.barValue = this.progresoValor + '%';
+            this.verificado = true;
+            btn.innerHTML = 'Verificado';
+            btn.style.background = 'green';
+            btn.style.borderColor = 'green';
           }
-
-          this.verificado = true;
-          btn.innerHTML = 'Verificado';
-          btn.style.background = 'green';
-          btn.style.borderColor = 'green';
         } else {
+          this._alertService.showAlert(resp);
+
           btn.innerHTML = 'Verificar';
 
           btn.style.background = 'red';
@@ -115,13 +118,15 @@ export class RegistroTurnosComponent implements OnInit {
     btn.disabled = true;
     let idStr = String(this.usuarioActual.id);
     this._turnoService.registrar(idStr, this.tipoTurno).subscribe((resp) => {
-      if (resp) {
+      if (!resp.error && !resp.warning) {
         this.turno = resp;
         this.turnoGenerado = true;
         setTimeout(() => {
           this.turnoGenerado = false;
           this.resetearFormulario();
         }, 5000);
+      } else {
+        this._alertService.showAlert(resp);
       }
     });
   }

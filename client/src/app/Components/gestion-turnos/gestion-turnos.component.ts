@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModuloService } from 'src/app/Service/modulo.service';
 import { MD5 } from 'crypto-js';
+import { AlertService } from 'src/app/Service/alert.service';
 
 @Component({
   selector: 'app-gestion-turnos',
@@ -34,7 +35,13 @@ export class GestionTurnosComponent implements OnInit {
   `;
   public usuario = '';
   public clave = '';
-  constructor(private _moduloService: ModuloService, private router: Router) {}
+
+  constructor(
+    private _alertService: AlertService,
+    private _moduloService: ModuloService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     let modulo = sessionStorage.getItem('MODULO');
     if (modulo) {
@@ -55,23 +62,33 @@ export class GestionTurnosComponent implements OnInit {
       }
     }
   }
+
   verificar(bttnVerificar: HTMLElement) {
     this._moduloService
       .validarLogin(this.usuario, MD5(this.clave).toString())
       .subscribe((resp) => {
-        if (!resp.error) {
+        if (!resp.error && !resp.warning) {
           this.modulo = resp.id;
           this.moduloActivo = true;
           sessionStorage.setItem('MODULO', resp.id);
           this.negado = false;
           this.router.navigateByUrl('Gestion/Atender');
         } else {
+          this._alertService.showAlert(resp);
           this.negado = true;
         }
       });
   }
   cerrar() {
-    this.moduloActivo = false;
-    sessionStorage.clear();
+    if (localStorage.getItem('TURNO')) {
+      this._alertService.showAlert({
+        warning:
+          'No puedes cerrar sesión si tienes un turno abierto. Ciérralo primero.',
+      });
+    } else {
+      this.moduloActivo = false;
+      sessionStorage.clear();
+      localStorage.clear();
+    }
   }
 }

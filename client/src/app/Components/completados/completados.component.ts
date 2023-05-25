@@ -7,7 +7,7 @@ import { AlertService } from 'src/app/Service/alert.service';
 @Component({
   selector: 'app-completados',
   templateUrl: './completados.component.html',
-  styleUrls: ['./completados.component.css']
+  styleUrls: ['./completados.component.css'],
 })
 export class CompletadosComponent implements OnInit, OnDestroy {
   constructor(
@@ -30,9 +30,11 @@ export class CompletadosComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         if (!res.error && !res.warning) {
           this.turnosCompletados = res;
-        } else if (!this.alertaMostrada) {
-          this._alertService.showAlert(res);
-          this.alertaMostrada = true;
+        } else {
+          if (!this.alertaMostrada) {
+            this._alertService.showAlert(res);
+            this.alertaMostrada = true;
+          }
           this.turnosCompletados = [];
         }
       });

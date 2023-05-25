@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 import { TurnoService } from 'src/app/Service/turno.service';
 import { interval, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -37,9 +43,11 @@ export class VizualizarTurnosComponent implements OnInit, OnDestroy {
             this.reproducirSonido();
           }
           this.turnosAsignados = res;
-        } else if (!this.alertaMostrada) {
-          this._alertService.showAlert(res);
-          this.alertaMostrada = true;
+        } else {
+          if (!this.alertaMostrada) {
+            this._alertService.showAlert(res);
+            this.alertaMostrada = true;
+          }
           this.turnosAsignados = [];
         }
       });

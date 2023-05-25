@@ -30,9 +30,11 @@ export class PendientesComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         if (!res.error && !res.warning) {
           this.turnosPendientes = res;
-        } else if (!this.alertaMostrada) {
-          this._alertService.showAlert(res);
-          this.alertaMostrada = true;
+        } else {
+          if (!this.alertaMostrada) {
+            this._alertService.showAlert(res);
+            this.alertaMostrada = true;
+          }
           this.turnosPendientes = [];
         }
       });
